@@ -68,6 +68,9 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
+        
+      - name: Debug ENV variables
+        run: env | sort
 
       - name: Build with Astro
         run: |
