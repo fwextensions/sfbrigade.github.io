@@ -25,6 +25,9 @@ concurrency:
 env:
   BUILD_PATH: "." # default value when not using subfolders
   POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
+  BOARD_MINUTES_DRIVE_ID: ${{ secrets.BOARD_MINUTES_DRIVE_ID }}
+  BOARD_MINUTES_DRIVE_PATH: ${{ secrets.BOARD_MINUTES_DRIVE_PATH }}
+  DRIVE_KEYS_JSON: ${{ secrets.DRIVE_KEYS_JSON }}
 
 jobs:
   build:
@@ -68,7 +71,7 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
-        
+
       - name: Debug ENV variables
         run: env | sort
 
