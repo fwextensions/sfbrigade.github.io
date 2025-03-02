@@ -45,17 +45,19 @@ const minutes = await getMinutes();
 
 	<TeamList />
 
-	<h3 id="minutes">Board Meeting Minutes</h3>
+	{minutes.length > 0 &&
+		<h3 id="minutes">Minutes of Quarterly Board Meetings</h3>
 
-	<ul>
-		{minutes.map((minute) => (
-			<li>
-				<a href={minute.data.url} target="_blank">
-					{minute.data.year} Q{minute.data.quarter}
-				</a>
-			</li>
-		))}
-	</ul>
+		<ul>
+			{minutes.map(({ data: { url, year, quarter, isDraft }}) => (
+				<li>
+					<a href={url} target="_blank">
+						{year} Q{quarter} {isDraft ? "(Draft)" : ""}
+					</a>
+				</li>
+			))}
+		</ul>
+	}
 
 	<h2 id="code-of-conduct">Code of Conduct</h2>
 
@@ -87,3 +89,9 @@ const minutes = await getMinutes();
 		Read the full Code of Conduct
 	</a>
 </BaseLayout>
+
+<style>
+	a[role="button"] {
+		margin-top: calc(.5 * var(--pico-block-spacing-vertical));
+	}
+</style>
